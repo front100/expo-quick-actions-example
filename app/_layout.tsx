@@ -4,6 +4,7 @@ import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
+import * as QuickActions from 'expo-quick-actions';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 
@@ -26,11 +27,22 @@ export default function RootLayout() {
     return null;
   }
 
+  QuickActions.setItems([
+    {
+      id: '0',
+      title: 'Open Settings',
+      subtitle: 'Go here to configure settings',
+      icon: 'shortcut_one',
+      params: { href: '/settings' },
+    },
+  ]);
+
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
+        <Stack.Screen name="settings" options={{ headerShown: false }} />
       </Stack>
     </ThemeProvider>
   );
